@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZeroMonk Chat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-gray-300 h-screen flex flex-col">
+
+    <!-- Container -->
+    <div class="flex h-full">
+
+        <!-- Sidebar -->
+        <aside id="sidebar" class="w-64 bg-gray-800 p-4 space-y-6 overflow-y-auto hidden lg:block">
+            <h2 class="text-xl font-bold text-gray-100">ZeroMonk</h2>
+            <nav class="space-y-4">
+                <a href="#" class="flex items-center space-x-2 hover:text-white">
+                    <span>🧠</span>
+                    <span>Chat</span>
+                </a>
+                <a href="#" class="flex items-center space-x-2 hover:text-white">
+                    <span>🔐</span>
+                    <span>Ethical AI</span>
+                </a>
+                <a href="#" class="flex items-center space-x-2 hover:text-white">
+                    <span>🌍</span>
+                    <span>Explore Tools</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Chat Container -->
+        <main class="flex-1 flex flex-col p-6">
+
+            <!-- Chat Header -->
+            <h1 class="text-2xl font-semibold text-gray-100 mb-4">How can I assist you?</h1>
+
+            <!-- Chat Window -->
+            <div id="chat-window" class="flex-1 bg-gray-800 rounded-lg p-4 space-y-4 overflow-y-auto">
+                <!-- Placeholder for messages -->
+            </div>
+
+            <!-- Input Field -->
+            <div class="mt-4 relative">
+                <input 
+                    id="user-input" 
+                    type="text" 
+                    placeholder="Message ZeroMonk..." 
+                    class="w-full rounded-lg p-4 bg-gray-700 text-gray-200 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 outline-none"
+                />
+                <button id="send-btn" class="absolute right-4 top-4 text-gray-400 hover:text-blue-400">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-6.516 6.516a2 2 0 11-2.828-2.828l6.516-6.516a2 2 0 112.828 2.828z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.586 14.586A2 2 0 1115 12l2.586 2.586z"></path>
+                    </svg>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const sendMessageButton = document.getElementById("send-btn");
+        const userInputField = document.getElementById("user-input");
+        const chatWindow = document.getElementById("chat-window");
+
+        sendMessageButton.addEventListener("click", async () => {
+            const userMessage = userInputField.value;
+
+            if (!userMessage) return; // Don't send if input is empty
+
+            // Append user message to chat window
+            chatWindow.innerHTML += `<div class="bg-blue-500 text-white p-2 rounded-lg">You: ${userMessage}</div>`;
+            userInputField.value = ""; // Clear input field
+
+            // Send user message to the server
+            try {
+                const response = await fetch("http://localhost:3000/chat", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ message: userMessage }),
+                });
+                const data = await response.json();
+
+                // Append bot reply to chat window
+                chatWindow.innerHTML += `<div class="bg-gray-600 text-white p-2 rounded-lg">Bot: ${data.reply}</div>`;
+                chatWindow.scrollTop = chatWindow.scrollHeight; // Scroll to the latest message
+            } catch (error) {
+                console.error("Error:", error);
+                chatWindow.innerHTML += `<div class="bg-red-500 text-white p-2 rounded-lg">Bot: Something went wrong!</div>`;
+            }
+        });
+    </script>
+
+</body>
+</html>
