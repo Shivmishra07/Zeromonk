@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZeroMonk Chat</title>
+    <title>ZeroSchool Chat</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-900 text-gray-300 h-screen flex flex-col">
@@ -15,13 +15,12 @@
         <aside id="sidebar" 
             class="w-full md:w-64 bg-gray-800 p-4 flex flex-col justify-between overflow-y-auto md:relative h-full">
             
-            <!-- Header Section -->
-            <div>
-                <h2 class="text-xl font-bold text-gray-100 text-center md:text-left">ZeroMonk</h2>
-            </div>
+            <!-- Top Section -->
+            <div class="flex flex-col items-center space-y-4">
+                <!-- ZeroSchool Title -->
+                <h2 class="text-2xl font-bold text-gray-100 text-center">ZeroSchool</h2>
 
-            <!-- Discovery Button at the bottom of the header -->
-            <div class="flex justify-center md:justify-start mt-6 mb-6">
+                <!-- Discovery Button below ZeroSchool -->
                 <button class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-500 transition">
                     🚀 Discovery
                 </button>
@@ -53,7 +52,7 @@
                 <input 
                     id="user-input" 
                     type="text" 
-                    placeholder="Message ZeroMonk..." 
+                    placeholder="Message ZeroSchool..." 
                     class="w-full rounded-lg p-4 bg-gray-700 text-gray-200 placeholder-gray-400 
                     focus:ring-2 focus:ring-blue-500 outline-none"
                 />
