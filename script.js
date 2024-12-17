@@ -21,12 +21,12 @@ function generateAIResponse() {
 // Function to display a message in the chat window
 function displayMessage(sender, message) {
     const messageDiv = document.createElement("div");
-    messageDiv.classList.add("p-2", "rounded-lg", "w-fit", "max-w-md");
+    messageDiv.classList.add("p-2", "rounded-lg", "w-fit", "max-w-md", "break-words", "my-1");
 
     if (sender === "user") {
-        messageDiv.classList.add("bg-blue-600", "text-white", "ml-auto");
+        messageDiv.classList.add("bg-blue-600", "text-white", "ml-auto", "text-right");
     } else {
-        messageDiv.classList.add("bg-gray-700", "text-gray-300", "mr-auto");
+        messageDiv.classList.add("bg-gray-700", "text-gray-300", "mr-auto", "text-left");
     }
 
     messageDiv.textContent = message;
@@ -36,7 +36,7 @@ function displayMessage(sender, message) {
     chatWindow.scrollTop = chatWindow.scrollHeight;
 }
 
-// Function to handle send button click
+// Function to handle sending a message
 function handleSendMessage() {
     const userMessage = userInput.value.trim();
 
@@ -44,10 +44,10 @@ function handleSendMessage() {
         // Display user's message
         displayMessage("user", userMessage);
 
-        // Clear input field
+        // Clear the input field
         userInput.value = "";
 
-        // Simulate AI response with a slight delay
+        // Simulate AI response with a delay
         setTimeout(() => {
             const aiMessage = generateAIResponse();
             displayMessage("ai", aiMessage);
@@ -55,10 +55,9 @@ function handleSendMessage() {
     }
 }
 
-// Event listener for send button
+// Event listeners
 sendBtn.addEventListener("click", handleSendMessage);
 
-// Event listener for 'Enter' key
 userInput.addEventListener("keypress", (event) => {
     if (event.key === "Enter") {
         handleSendMessage();
