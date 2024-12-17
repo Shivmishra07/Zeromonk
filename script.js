@@ -63,3 +63,4 @@ userInput.addEventListener("keypress", (event) => {
         handleSendMessage();
     }
 });
+
