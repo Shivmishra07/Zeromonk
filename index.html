@@ -12,28 +12,27 @@
     <div class="flex h-full flex-col md:flex-row">
 
         <!-- Sidebar -->
-        <!-- Sidebar -->
-<aside id="sidebar" 
-    class="w-full md:w-64 bg-gray-800 p-4 space-y-6 flex flex-col overflow-y-auto md:relative h-full">
-    
-    <!-- Top Section -->
-    <div>
-        <h2 class="text-xl font-bold text-gray-100 text-center md:text-left">ZeroMonk</h2>
+        <aside id="sidebar" 
+            class="w-full md:w-64 bg-gray-800 p-4 space-y-6 flex flex-col overflow-y-auto md:relative h-full">
+            
+            <!-- Top Section -->
+            <div>
+                <h2 class="text-xl font-bold text-gray-100 text-center md:text-left">ZeroMonk</h2>
 
-        <!-- Discovery Button -->
-        <div class="flex justify-center md:justify-start mt-6">
-            <button class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-500 transition">
-                🚀 Discovery
+                <!-- Discovery Button -->
+                <div class="flex justify-center md:justify-start mt-6">
+                    <button class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-500 transition">
+                        🚀 Discovery
+                    </button>
+                </div>
+            </div>
+
+            <!-- Footer Section -->
+            <button 
+                class="w-full bg-gray-700 text-white py-2 px-4 rounded-md hover:bg-gray-600 transition mt-auto">
+                👤 Account
             </button>
-        </div>
-    </div>
-
-    <!-- Footer Section -->
-    <button 
-        class="w-full bg-gray-700 text-white py-2 px-4 rounded-md hover:bg-gray-600 transition mt-auto">
-        👤 Account
-    </button>
-</aside>
+        </aside>
 
         <!-- Chat Container -->
         <main class="flex-1 flex flex-col p-4 md:p-6">
@@ -71,6 +70,32 @@
         </main>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const input = document.getElementById("user-input");
+            const sendBtn = document.getElementById("send-btn");
+            const chatWindow = document.getElementById("chat-window");
+
+            // Function to send a message
+            const sendMessage = () => {
+                const message = input.value.trim();
+                if (message !== "") {
+                    const msgElement = document.createElement("div");
+                    msgElement.className = "p-2 bg-gray-700 rounded-lg text-gray-300 self-end";
+                    msgElement.textContent = message;
+
+                    chatWindow.appendChild(msgElement);
+                    chatWindow.scrollTop = chatWindow.scrollHeight; // Auto-scroll
+                    input.value = ""; // Clear input
+                }
+            };
+
+            // Event Listeners
+            sendBtn.addEventListener("click", sendMessage);
+            input.addEventListener("keypress", (e) => {
+                if (e.key === "Enter") sendMessage();
+            });
+        });
+    </script>
 </body>
 </html>
